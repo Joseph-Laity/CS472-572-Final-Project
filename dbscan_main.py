@@ -211,7 +211,7 @@ for cluster_id in np.unique(labels_no_earth):
     cluster_indices = df_no_earth.index[labels_no_earth == cluster_id].to_numpy()
 
     # Save just indices
-    out_path = os.path.join(export_dir, f"cluster_{cluster_id}_indices.csv")
+    out_path = os.path.join(export_dir, f"dbscan_cluster_{cluster_id}.csv")
     
     pd.DataFrame({"index": cluster_indices}).to_csv(out_path, index=False)
 
