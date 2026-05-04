@@ -58,7 +58,7 @@ clusterer = DBSCAN(
 labels = clusterer.fit_predict(X_scaled)
 
 # =========================
-# 4. Assign Earth to nearest cluster (OPTION 1)
+# 4. Assign Earth to nearest cluster
 # =========================
 cluster_mask = labels != -1
 
