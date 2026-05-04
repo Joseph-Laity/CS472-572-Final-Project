@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # =========================
 # 1. Load data
 # =========================
-DATASET = 1
+DATASET = 0
 df = pd.read_csv(f"psg_models{DATASET}.csv")
 
 earth_data = {
@@ -188,33 +188,37 @@ plt.savefig(os.path.join(output_dir, "hdbscan_PCA_projection.png"))
 plt.close()
 
 # =========================
-# 9. Export clusters as index lists (NO EARTH, NO CLUSTER COLUMN)
+# 9. Export clusters
 # =========================
 
 export_dir = "cluster_outputs"
 os.makedirs(export_dir, exist_ok=True)
 
-# Remove Earth before indexing
+# Remove Earth from labels
 labels_no_earth = labels[:-1]
 
-# Original dataframe (no Earth included)
+# Original dataframe (without Earth)
 df_no_earth = df.copy()
 
-# Add original index as a column (this is what you want to preserve)
-df_no_earth["original_index"] = df_no_earth.index
+# Add original index column
+df_no_earth.insert(0, "original_index", df_no_earth.index)
 
-# Export indices per cluster
+# Export each cluster
 for cluster_id in np.unique(labels_no_earth):
 
+    # Skip noise
     if cluster_id == -1:
         continue
 
-    # Get indices of rows in this cluster
-    cluster_indices = df_no_earth.index[labels_no_earth == cluster_id].to_numpy()
+    # Rows belonging to this cluster
+    cluster_df = df_no_earth.iloc[labels_no_earth == cluster_id]
 
-    # Save just indices
-    out_path = os.path.join(export_dir, f"hdbscan_cluster_{cluster_id}.csv")
-    
-    pd.DataFrame({"index": cluster_indices}).to_csv(out_path, index=False)
+    # Save
+    out_path = os.path.join(
+        export_dir,
+        f"cluster_{cluster_id}.csv"
+    )
 
-print(f"Saved cluster index files to '{export_dir}'")
+    cluster_df.to_csv(out_path, index=False)
+
+print(f"Saved cluster CSV files to '{export_dir}'")
