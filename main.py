@@ -216,7 +216,7 @@ for cluster_id in np.unique(labels_no_earth):
     # Save
     out_path = os.path.join(
         export_dir,
-        f"cluster_{cluster_id}.csv"
+        f"hdbscan_cluster_{cluster_id}.csv"
     )
 
     cluster_df.to_csv(out_path, index=False)
