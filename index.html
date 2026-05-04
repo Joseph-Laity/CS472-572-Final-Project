@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Planetary Clustering Project</title>
+  <style>
+    body { font-family: Arial; margin: 40px; background: #0b0f1a; color: #eee; }
+    h1, h2 { color: #6ec1ff; }
+    img { width: 600px; margin: 20px 0; border-radius: 10px; }
+    .section { margin-bottom: 50px; }
+  </style>
+</head>
+<body>
+
+<h1>Density-Based Clustering of Earth-like Planetary Data</h1>
+
+<div class="section">
+  <h2>Overview</h2>
+  <p>
+    This project explores clustering of planetary atmospheric compositions using density-based algorithms.
+    We compare DBSCAN and HDBSCAN to identify Earth-like planets based on gas composition similarity.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Methodology</h2>
+  <ul>
+    <li>Selected atmospheric features (H2O → NO2)</li>
+    <li>Standardized data using StandardScaler</li>
+    <li>Applied DBSCAN clustering</li>
+    <li>Projected clusters using PCA</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Earth Reference</h2>
+  <p>
+    Earth was added as a reference vector and assigned to the nearest cluster using Nearest Neighbors.
+  </p>
+</div>
+
+<div class="section">
+  <h2>PCA Visualization</h2>
+  <img src="images/dbscan_PCA_projection.png">
+</div>
+
+<div class="section">
+  <h2>Results</h2>
+  <p>
+    HDBSCAN outperformed DBSCAN by reducing noise and producing more meaningful clusters.
+    DBSCAN required careful tuning of epsilon and still resulted in significant noise points.
+  </p>
+</div>
+
+</body>
+</html>
